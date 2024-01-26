@@ -517,7 +517,7 @@ class Impala(OpenSkyDBAPI):
         """
 
         query_str = (
-            "select {columns} from flights_data4 "
+            "select {columns} from flights_data5 "
             "where day >= {before_day} and day < {after_day} "
             "{other_params}"
         )
@@ -701,7 +701,7 @@ class Impala(OpenSkyDBAPI):
 
         The following options build more complicated requests by merging
         information from two tables in the Impala database, resp.
-        ``state_vectors_data5`` and ``flights_data4``.
+        ``state_vectors_data5`` and ``flights_data5``.
 
         :param departure_airport: a string for the ICAO identifier of the
             airport. Selects flights departing from the airport between the two
@@ -855,7 +855,7 @@ class Impala(OpenSkyDBAPI):
             other_tables += (
                 "join (select icao24 as e_icao24, firstseen, "
                 "estdepartureairport, lastseen, estarrivalairport, "
-                "callsign as e_callsign, day from flights_data4 "
+                "callsign as e_callsign, day from flights_data5 "
                 "where estdepartureairport ='{departure_airport}' "
                 "and estarrivalairport ='{arrival_airport}' "
                 "and ({day_min:.0f} <= day and day <= {day_max:.0f})) as est"
@@ -874,7 +874,7 @@ class Impala(OpenSkyDBAPI):
             other_tables += (
                 "join (select icao24 as e_icao24, firstseen, "
                 "estdepartureairport, lastseen, estarrivalairport, "
-                "callsign as e_callsign, day from flights_data4 "
+                "callsign as e_callsign, day from flights_data5 "
                 "where estarrivalairport ='{arrival_airport}' "
                 "and ({day_min:.0f} <= day and day <= {day_max:.0f})) as est"
             ).format(
@@ -891,7 +891,7 @@ class Impala(OpenSkyDBAPI):
             other_tables += (
                 "join (select icao24 as e_icao24, firstseen, "
                 "estdepartureairport, lastseen, estarrivalairport, "
-                "callsign as e_callsign, day from flights_data4 "
+                "callsign as e_callsign, day from flights_data5 "
                 "where estdepartureairport ='{departure_airport}' "
                 "and ({day_min:.0f} <= day and day <= {day_max:.0f})) as est"
             ).format(
@@ -904,7 +904,7 @@ class Impala(OpenSkyDBAPI):
             other_tables += (
                 "join (select icao24 as e_icao24, firstseen, "
                 "estdepartureairport, lastseen, estarrivalairport, "
-                "callsign as e_callsign, day from flights_data4 "
+                "callsign as e_callsign, day from flights_data5 "
                 "where (estdepartureairport ='{arrival_or_departure_airport}' "
                 "or estarrivalairport = '{arrival_or_departure_airport}') "
                 "and ({day_min:.0f} <= day and day <= {day_max:.0f})) as est"
@@ -1097,7 +1097,7 @@ class Impala(OpenSkyDBAPI):
 
         The following options build more complicated requests by merging
         information from two tables in the Impala database, resp.
-        ``rollcall_replies_data4`` and ``flights_data4``.
+        ``rollcall_replies_data4`` and ``flights_data5``.
 
         :param departure_airport: a string for the ICAO identifier of the
             airport. Selects flights departing from the airport between the two
@@ -1290,7 +1290,7 @@ class Impala(OpenSkyDBAPI):
             other_tables += (
                 "join (select icao24 as e_icao24, firstseen, "
                 "estdepartureairport, lastseen, estarrivalairport, "
-                "callsign, day from flights_data4 "
+                "callsign, day from flights_data5 "
                 "where estdepartureairport ='{departure_airport}' "
                 "and estarrivalairport ='{arrival_airport}' "
                 "and ({day_min:.0f} <= day and day <= {day_max:.0f})) as est"
@@ -1305,7 +1305,7 @@ class Impala(OpenSkyDBAPI):
             other_tables += (
                 "join (select icao24 as e_icao24, firstseen, "
                 "estdepartureairport, lastseen, estarrivalairport, "
-                "callsign, day from flights_data4 "
+                "callsign, day from flights_data5 "
                 "where estarrivalairport ='{arrival_airport}' "
                 "and ({day_min:.0f} <= day and day <= {day_max:.0f})) as est"
             ).format(
@@ -1318,7 +1318,7 @@ class Impala(OpenSkyDBAPI):
             other_tables += (
                 "join (select icao24 as e_icao24, firstseen, "
                 "estdepartureairport, lastseen, estarrivalairport, "
-                "callsign, day from flights_data4 "
+                "callsign, day from flights_data5 "
                 "where estdepartureairport ='{departure_airport}' "
                 "and ({day_min:.0f} <= day and day <= {day_max:.0f})) as est"
             ).format(
@@ -1331,7 +1331,7 @@ class Impala(OpenSkyDBAPI):
             other_tables += (
                 "join (select icao24 as e_icao24, firstseen, "
                 "estdepartureairport, lastseen, estarrivalairport, "
-                "callsign, day from flights_data4 "
+                "callsign, day from flights_data5 "
                 "where (estdepartureairport ='{arrival_or_departure_airport}' "
                 "or estarrivalairport = '{arrival_or_departure_airport}') "
                 "and ({day_min:.0f} <= day and day <= {day_max:.0f})) as est"

@@ -117,7 +117,7 @@ class Impala(OpenSkyDBAPI):
     )
 
     basic_request = (
-        "select {columns} from state_vectors_data4 {other_tables} "
+        "select {columns} from state_vectors_data5 {other_tables} "
         "{where_clause} hour>={before_hour} and hour<{after_hour} "
         "and time>={before_time} and time<{after_time} "
         "{other_params}"
@@ -701,7 +701,7 @@ class Impala(OpenSkyDBAPI):
 
         The following options build more complicated requests by merging
         information from two tables in the Impala database, resp.
-        ``state_vectors_data4`` and ``flights_data4``.
+        ``state_vectors_data5`` and ``flights_data4``.
 
         :param departure_airport: a string for the ICAO identifier of the
             airport. Selects flights departing from the airport between the two
@@ -775,13 +775,13 @@ class Impala(OpenSkyDBAPI):
         count_airports_params = sum(x is not None for x in airports_params)
 
         if count is True and serials is None:
-            other_tables += ", state_vectors_data4.serials s "
+            other_tables += ", state_vectors_data5.serials s "
 
         if isinstance(serials, Iterable):
-            other_tables += ", state_vectors_data4.serials s "
+            other_tables += ", state_vectors_data5.serials s "
             other_params += "and s.ITEM in {} ".format(tuple(serials))
         elif isinstance(serials, int):
-            other_tables += ", state_vectors_data4.serials s "
+            other_tables += ", state_vectors_data5.serials s "
             other_params += "and s.ITEM = {} ".format(serials)
 
         if isinstance(icao24, str):
@@ -1252,7 +1252,7 @@ class Impala(OpenSkyDBAPI):
 
             other_tables += (
                 "join (select min(time) as firstseen, max(time) as lastseen, "
-                "icao24  as e_icao24 from state_vectors_data4 "
+                "icao24  as e_icao24 from state_vectors_data5 "
                 "where hour>={before_hour} and hour<{after_hour} and "
                 f"time>={start_ts.timestamp()} and time<{stop_ts.timestamp()} "
                 f"{callsigns}"
@@ -1273,7 +1273,7 @@ class Impala(OpenSkyDBAPI):
 
             other_tables += (
                 "join (select min(time) as firstseen, max(time) as lastseen, "
-                "icao24 as e_icao24 from state_vectors_data4 "
+                "icao24 as e_icao24 from state_vectors_data5 "
                 "where hour>={before_hour} and hour<{after_hour} and "
                 f"time>={start_ts.timestamp()} and time<{stop_ts.timestamp()} "
                 f"and lon>={west} and lon<={east} "
